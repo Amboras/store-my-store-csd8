@@ -20,24 +20,18 @@ function AccordionItem({
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
   return (
-    <div className="border-b last:border-0">
+    <div className="border-b border-[#e8ddd0] last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between py-4 text-left"
       >
-        <span className="text-sm font-medium">{title}</span>
+        <span className="text-sm font-semibold text-[#2a1a0e] uppercase tracking-wide">{title}</span>
         <ChevronDown
-          className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
+          className={`h-4 w-4 text-[#8b5a2b] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
-      <div
-        className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? 'max-h-96 pb-4' : 'max-h-0'
-        }`}
-      >
-        <div className="text-sm text-muted-foreground leading-relaxed">
+      <div className={`overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-96 pb-4' : 'max-h-0'}`}>
+        <div className="text-sm text-[#5a3e2b] leading-relaxed">
           {children}
         </div>
       </div>
@@ -47,27 +41,37 @@ function AccordionItem({
 
 export default function ProductAccordion({ description, details }: ProductAccordionProps) {
   return (
-    <div className="border-t">
+    <div className="border-t border-[#e8ddd0]">
       {description && (
-        <AccordionItem title="Description" defaultOpen>
-          <div dangerouslySetInnerHTML={{ __html: description }} />
+        <AccordionItem title="Product Description" defaultOpen>
+          <div className="prose prose-sm max-w-none text-[#5a3e2b]" dangerouslySetInnerHTML={{ __html: description }} />
         </AccordionItem>
       )}
 
-      <AccordionItem title="Shipping & Returns">
+      <AccordionItem title="Shipping & Delivery">
         <ul className="space-y-2">
-          <li>Free standard shipping on orders over $75</li>
-          <li>Express shipping available at checkout</li>
-          <li>Free returns within 30 days of delivery</li>
-          <li>Items must be unworn with original tags</li>
+          <li>Free standard delivery on orders above ₹999 — pan India</li>
+          <li>Express shipping (1–2 days) available at checkout</li>
+          <li>Dispatched within 24 hours of order confirmation</li>
+          <li>Fully tracked and insured shipments</li>
         </ul>
       </AccordionItem>
 
-      <AccordionItem title="Care Instructions">
+      <AccordionItem title="Returns & Purity Guarantee">
         <ul className="space-y-2">
-          <li>Please refer to the care label on the product</li>
-          <li>Store in a cool, dry place away from direct sunlight</li>
-          <li>Handle with care to maintain product quality</li>
+          <li>7-day hassle-free return policy</li>
+          <li>Every product tested for purity and authenticity before dispatch</li>
+          <li>If you receive a damaged or incorrect item, we replace it free of charge</li>
+          <li>Contact us at support@vedamandir.com or call +91 98765 43210</li>
+        </ul>
+      </AccordionItem>
+
+      <AccordionItem title="Usage & Storage">
+        <ul className="space-y-2">
+          <li>Store in a cool, dry place away from direct sunlight and moisture</li>
+          <li>Seal packets tightly after each use to preserve fragrance and potency</li>
+          <li>Recommended usage instructions are printed on each product</li>
+          <li>For personalised puja guidance, use our free Pandit Helpline</li>
         </ul>
       </AccordionItem>
     </div>

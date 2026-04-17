@@ -4,35 +4,37 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 0 0% 10%;
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 35 40% 50%;
+    /* Warm saffron / sandalwood / ivory palette */
+    --background: 36 30% 97%;
+    --foreground: 20 30% 12%;
+    --muted: 36 18% 91%;
+    --muted-foreground: 20 15% 45%;
+    --accent: 28 80% 50%;
     --accent-foreground: 0 0% 100%;
-    --border: 40 10% 88%;
-    --ring: 35 40% 50%;
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 98%;
+    --border: 36 15% 84%;
+    --ring: 28 80% 50%;
+    --primary: 20 30% 12%;
+    --primary-foreground: 36 30% 97%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Brand colors (dynamically injected from Store.metadata.brand) */
-    /* Access in CSS: var(--brand-primary), var(--brand-secondary) */
-    /* Managed by BrandStyleInjector component */
+    /* Brand overrides */
+    --brand-primary: #c2550a;
+    --brand-secondary: #8b5a2b;
+    --brand-gold: #d4a017;
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 40 20% 94%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 35 45% 55%;
+    --background: 20 20% 8%;
+    --foreground: 36 25% 90%;
+    --muted: 20 15% 14%;
+    --muted-foreground: 36 10% 55%;
+    --accent: 28 70% 48%;
     --accent-foreground: 0 0% 100%;
-    --border: 0 0% 16%;
-    --ring: 35 45% 55%;
-    --primary: 40 20% 94%;
-    --primary-foreground: 0 0% 6%;
+    --border: 20 15% 20%;
+    --ring: 28 70% 48%;
+    --primary: 36 25% 90%;
+    --primary-foreground: 20 20% 8%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
   }
@@ -72,7 +74,7 @@
     @apply w-full;
   }
 
-  /* Brand color utilities - uses colors from Store.metadata.brand */
+  /* Brand color utilities */
   .btn-brand-primary {
     background-color: var(--brand-primary, hsl(var(--primary)));
     color: white;
@@ -82,7 +84,7 @@
   }
 
   .text-brand-primary {
-    color: var(--brand-primary, hsl(var(--primary)));
+    color: var(--brand-primary, hsl(var(--accent)));
   }
 
   .text-brand-secondary {
@@ -100,6 +102,23 @@
   .bg-brand-secondary {
     background-color: var(--brand-secondary, hsl(var(--accent)));
   }
+
+  .text-brand-gold {
+    color: var(--brand-gold, #d4a017);
+  }
+
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .ornament-line::before,
+  .ornament-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: hsl(var(--border));
+  }
 }
 
 /* Smooth scrolling */
@@ -109,7 +128,8 @@ html {
 
 /* Selection color */
 ::selection {
-  @apply bg-accent/20 text-foreground;
+  background: rgba(194, 85, 10, 0.15);
+  color: hsl(var(--foreground));
 }
 
 /* Focus styles */
@@ -119,16 +139,27 @@ html {
 
 /* Cookie consent animation */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(1rem); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
+}
+
+/* Mandala / decorative spin */
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-slow-spin {
+  animation: slow-spin 30s linear infinite;
+}
+
+/* Fade-in-up */
+@keyframes fade-in-up-custom {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up-custom 0.7s ease-out;
 }
